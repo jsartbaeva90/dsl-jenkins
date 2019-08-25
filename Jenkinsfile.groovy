@@ -58,21 +58,24 @@ pipeline{
                 }
             }
         }
-        stage ("Pull Repo"){
+        stage("Pull Repo"){
             steps{
-                git("https://github.com/jsartbaeva90/packer-infra.git")
-                sh "ls"
+                git("https://github.com/farrukh90/packerde.git")
             }
         }
         stage("Build Image"){
             steps{
-                sh "packer build updated/updated.json"
+                //sh "packer build updated/updated.json"
+                echo "Hello"
             }
         }
     }
     post{
-      success {
-          mail to:  "jsartbaeva90@gmail.com", subject: "job”, body: “job completed"
+        success {
+            echo "Done"
         }
-     }
+        failure {
+            mail to:  "jsartbaeva90@gmail.com", subject: "job", body: "job completed"
+        }
+    }
 }
