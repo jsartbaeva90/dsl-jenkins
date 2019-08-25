@@ -20,6 +20,7 @@ pipeline{
                         if (exists) {
                             sh "unzip -o terraform_0.12.7_linux_amd64.zip"
                             sh "mv terraform /bin"
+                            sh "terraform version"
                         } else {
                             sh "wget https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip"
                             sh "unzip -o terraform_0.12.7_linux_amd64.zip"
