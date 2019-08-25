@@ -73,6 +73,6 @@ pipeline{
     post{
       success {
           mail to:  "jsartbaeva90@gmail.com", subject: "job”, body: “job completed"
-    }
-  }
+        }
+     }
 }
