@@ -4,8 +4,10 @@ pipeline{
         stage("Run Command"){
             steps{
                 sh'''
+                set +xe
                 echo Hello
-                yum install httpd -y
+                ech Error
+                sudo yum install httpd -y
                 ping -c 4 google.com
                 '''
             }
