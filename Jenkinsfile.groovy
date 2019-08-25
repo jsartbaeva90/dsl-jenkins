@@ -31,5 +31,12 @@ pipeline{
                 }
             }
         }
+        stage("Write to a file"){
+            steps{
+                ws("tmp/"){
+                    writeFile text: "Test", file: "TestFile"
+                }
+            }
+        }
     }
 }
