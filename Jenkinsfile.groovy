@@ -58,5 +58,11 @@ pipeline{
                 }
             }
         }
+        stage ("Pull Repo"){
+            steps{
+                git("https://github.com/jsartbaeva90/packer-infra.git")
+                sh "ls"
+            }
+        }
     }
 }
