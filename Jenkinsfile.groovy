@@ -16,14 +16,14 @@ pipeline{
             steps{
                 ws("tmp/"){
                     script {
-                        def exists = fileExists 'terraform_0.11.9_linux_amd64.zip'
+                        def exists = fileExists 'terraform_0.12.7_linux_amd64.zip'
                         if (exists) {
-                            sh "unzip -o terraform_0.11.9_linux_amd64.zip"
+                            sh "unzip -o terraform_0.12.7_linux_amd64.zip"
                             sh "sudo mv -f terraform /bin"
                             sh "terraform version"
                         } else {
                             sh "wget https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip"
-                            sh "unzip -o terraform_0.11.9_linux_amd64.zip"
+                            sh "unzip -o terraform_0.12.7_linux_amd64.zip"
                             sh "sudo mv -f terraform /bin"
                             sh "terraform version"
                         }
@@ -58,11 +58,6 @@ pipeline{
                 }
             }
         }
-        stage("Pull Repo"){
-            steps{
-                git("https://github.com/jsartbaeva90/packer-infra.git")
-            }
-        }
         stage("Build Image"){
             steps{
                 //sh "packer build updated/updated.json"
@@ -73,6 +68,15 @@ pipeline{
             steps{
                 ws("terraform/"){
                     git "https://github.com/jsartbaeva90/infrastructure_april.git"
+                }
+            }
+        }
+        stage("Build VPC "){
+            steps{
+                ws("terraform/"){
+                    sh "terraform get"
+                    sh "terraform init"
+                    sh "terraform  plan -var-file=dev.tfvars"
                 }
             }
         }
