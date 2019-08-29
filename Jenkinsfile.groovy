@@ -69,6 +69,13 @@ pipeline{
                 echo "Hello"
             }
         }
+        stage("Clone VPC Repo"){
+            steps{
+                ws("terraform/"){
+                    git "https://github.com/jsartbaeva90/infrastructure_april.git"
+                }
+            }
+        }
     }
     post{
         success {
